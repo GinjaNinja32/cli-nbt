@@ -13,7 +13,7 @@ Type 'help' at the '>' prompt to access this list in-app.
 <tr><td>add &lt;type&gt;</td><td>Add a new tag</td></tr>
 <tr><td>rem &lt;name|index&gt;</td><td>Remove a tag</td></tr>
 <tr><td>ls</td><td>View the contents of the current tag</td></tr>
-<tr><td>cd</td><td>Change to another tag. Path is '/' or '\\'-separated, '..' is parent.</td></tr>
+<tr><td>cd</td><td>Change to another tag. Path is '/' or '\'-separated, '..' is parent.</td></tr>
 <tr><td>clr</td><td>Clear (empty) the current tag</td></tr>
 <tr><td>exit</td><td>Exits the program without saving</td></tr>
 <tr><td>save &lt;filename&gt;</td><td>Save to the specified file.</td></tr>
