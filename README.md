@@ -5,6 +5,8 @@ Command-line NBT editor
 
 Author: GinjaNinja32 (@GNinja32)
 
+Binary: http://bit.ly/YMhSNP
+
 Type 'help' at the '>' prompt to access this list in-app.
 
 <table><tr><td><strong>Command</strong></td><td><strong>Result</strong></td></tr>
