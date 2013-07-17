@@ -12,14 +12,14 @@ public class TagByteArray extends Tag {
     ArrayList<Byte> payload = new ArrayList<>();
 
     public TagByteArray(String name, ArrayList<Byte> payload) {
-        super(name);
+        super(name, "bytearr");
         if(payload != null) {
             this.payload = payload;
         }
     }
     
     public TagByteArray(String name, Byte[] payload) {
-        super(name);
+        super(name, "bytearr");
         this.payload.addAll(Arrays.asList(payload));
     }
 
@@ -62,5 +62,10 @@ public class TagByteArray extends Tag {
             s += "  " + i + ": " + payload.get(i) + "\n";
         }
         return s + "}";
+    }
+
+    @Override
+    public Object payloadGeneric() {
+        return payload.toArray(new Byte[0]);
     }
 }

@@ -9,7 +9,7 @@ public class TagFloat extends Tag {
     float payload;
 
     public TagFloat(String name, float payload) {
-        super(name);
+        super(name, "float");
         this.payload = payload;
     }
 
@@ -18,6 +18,11 @@ public class TagFloat extends Tag {
     }
 
     public float getPayload() {
+        return payload;
+    }
+
+    @Override
+    public Object payloadGeneric() {
         return payload;
     }
     

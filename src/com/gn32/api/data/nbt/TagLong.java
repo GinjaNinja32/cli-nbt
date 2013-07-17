@@ -1,7 +1,5 @@
 package com.gn32.api.data.nbt;
 
-import com.gn32.api.data.nbt.Tag;
-
 /**
  *
  * @author Ben
@@ -11,7 +9,7 @@ public class TagLong extends Tag {
     long payload;
 
     public TagLong(String name, long payload) {
-        super(name);
+        super(name, "long");
         this.payload = payload;
     }
 
@@ -25,5 +23,10 @@ public class TagLong extends Tag {
     
     public String toString() {
         return "TAG_Long("+name+"):"+payload;
+    }
+
+    @Override
+    public Object payloadGeneric() {
+        return payload;
     }
 }

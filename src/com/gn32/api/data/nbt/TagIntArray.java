@@ -12,18 +12,23 @@ public class TagIntArray extends Tag {
     ArrayList<Integer> payload = new ArrayList<>();
 
     public TagIntArray(String name, ArrayList<Integer> payload) {
-        super(name);
+        super(name, "intarr");
         if(payload != null) {
             this.payload = payload;
         }
     }
     
     public TagIntArray(String name, Integer[] payload) {
-        super(name);
+        super(name, "intarr");
         this.payload.addAll(Arrays.asList(payload));
     }
 
     public Integer[] getPayload() {
+        return payload.toArray(new Integer[0]);
+    }
+
+    @Override
+    public Object payloadGeneric() {
         return payload.toArray(new Integer[0]);
     }
 

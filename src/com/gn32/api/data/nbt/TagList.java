@@ -12,7 +12,7 @@ public class TagList extends Tag {
     ArrayList<Tag> payload = new ArrayList<>();
 
     public TagList(String name, Tag... payload) {
-        super(name);
+        super(name, "list");
         this.payload.addAll(Arrays.asList(payload));
     }
     
@@ -41,6 +41,11 @@ public class TagList extends Tag {
     }
 
     public Tag[] getPayload() {
+        return payload.toArray(new Tag[0]);
+    }
+
+    @Override
+    public Object payloadGeneric() {
         return payload.toArray(new Tag[0]);
     }
     

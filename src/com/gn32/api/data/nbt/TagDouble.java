@@ -9,7 +9,7 @@ public class TagDouble extends Tag {
     double payload;
 
     public TagDouble(String name, double payload) {
-        super(name);
+        super(name, "double");
         this.payload = payload;
     }
 
@@ -18,6 +18,11 @@ public class TagDouble extends Tag {
     }
 
     public double getPayload() {
+        return payload;
+    }
+
+    @Override
+    public Object payloadGeneric() {
         return payload;
     }
     

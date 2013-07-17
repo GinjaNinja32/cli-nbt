@@ -18,10 +18,20 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
- *
+ * Methods that don't fit elsewhere
  * @author GinjaNinja32
  */
 public class Utils {
+    /**
+     * The first 50 powers of 2, starting with 2^0 (i.e. {@code pow2[2] == 4} and {@code pow2[8] == 256}).
+     */
+    public static final long pow2[];
+    static {
+        pow2 = new long[50];
+        for(int i=0; i<50; i++) {
+            pow2[i] = (long)Math.pow(2, i);
+        }
+    }
     /** No debug info at all */
     public static final int DEBUG_NONE = 0;
     /** Only on crash */
@@ -50,9 +60,10 @@ public class Utils {
         if(val < 0) {
             return getFactors(-val);
         }
-        LinkedHashSet<Long> s = new LinkedHashSet<Long>();
-        LinkedHashSet<Long> s1 = new LinkedHashSet<Long>();
-        for(long l=1; l<= Math.sqrt(val); l++) {
+        LinkedHashSet<Long> s = new LinkedHashSet<>();
+        LinkedHashSet<Long> s1 = new LinkedHashSet<>();
+        double sqrt = Math.sqrt(val);
+        for(long l=1; l <= sqrt; l++) {
             if((double)val % (double)l == 0) {
                 s.add(l);
                 s1.add(val/l);
@@ -85,7 +96,7 @@ public class Utils {
         return 1;
     }
     public static boolean getNthBit(long val, int bit) {
-        long bitval = (long)Math.pow(2, bit); // should be an integer
+        long bitval = (long)Math.pow(2, bit); // integer unless Math.pow breaks
         if(val < bitval) {
             // if number is too small, bit CANNOT be 1
             return false;
@@ -93,7 +104,7 @@ public class Utils {
         return ((val >> bit) % 2) == 1;
     }
     public static int bit(long val, int bit) {
-        long bitval = (long)Math.pow(2, bit); // should be an integer
+        long bitval = (long)Math.pow(2, bit); // integer unless Math.pow breaks
         if(val < bitval) {
             // if number is too small, bit CANNOT be 1
             return 0;
@@ -129,7 +140,7 @@ public class Utils {
         return (long)Math.pow(base, exponent);
     }
     public static long powExperimental(long base, long exponent) {
-        // only need to check primes...
+        // only need to check primes; x^4 == (x^2)^2
         for(int i=0; i<prime.length; i++) {
             while((exponent%prime[i])==0) { // while we can simplify a square
                 base = pow(prime[i], base);
@@ -150,15 +161,11 @@ public class Utils {
         }
     }
     public static void println(String... s) {
-        for(String s1 : s) {
-            System.out.print(s1 + "\t");
-        }
+        print(s);
         System.out.println();
     }
     public static void println(boolean... b) {
-        for(boolean b1: b) {
-            System.out.print((b1?"true\t":"false\t"));
-        }
+        print(b);
         System.out.println();
     }
     public static void setDebug(int mode) {debugMode = mode;}
@@ -185,11 +192,11 @@ public class Utils {
         for(boolean o1 : o) {s += (o1?"true ":"false ");}
         return s.substring(0, s.length()-1);
     }
-    public static String explode(long... o) {
-        String s = "";
-        for(long o1 : o) {s += Long.toString(o1) + " ";}
-        return s.substring(0, s.length()-1);
-    }
+//    public static String explode(long... o) {
+//        String s = "";
+//        for(long o1 : o) {s += Long.toString(o1) + " ";}
+//        return s.substring(0, s.length()-1);
+//    }
     public static String explode(int... o) {
         String s = "";
         for(int o1 : o) {s += Integer.toString(o1) + " ";}
@@ -200,16 +207,16 @@ public class Utils {
         for(short o1 : o) {s += Short.toString(o1) + " ";}
         return s.substring(0, s.length()-1);
     }
-    public static String explode(double... o) {
-        String s = "";
-        for(double o1 : o) {s += Double.toString(o1) + " ";}
-        return s.substring(0, s.length()-1);
-    }
-    public static String explode(float... o) {
-        String s = "";
-        for(float o1 : o) {s += Float.toString(o1) + " ";}
-        return s.substring(0, s.length()-1);
-    }
+//    public static String explode(double... o) {
+//        String s = "";
+//        for(double o1 : o) {s += Double.toString(o1) + " ";}
+//        return s.substring(0, s.length()-1);
+//    }
+//    public static String explode(float... o) {
+//        String s = "";
+//        for(float o1 : o) {s += Float.toString(o1) + " ";}
+//        return s.substring(0, s.length()-1);
+//    }
     public static String explode(char... o) {
         return new String(o);
     }
@@ -219,14 +226,21 @@ public class Utils {
         return s.substring(0, s.length()-1);
     }
     
-    public static int clamp(int min, int val, int max) {
+    public static double clamp(double min, double val, double max) {
         if(max < min) {throw new IllegalArgumentException("Maximum is less than minimum!");}
         return min > val ? min :
                max < val ? max : val;
     }
-    public static int wrap(int min, int val, int max) {
+    public static double clamp2(double bounda, double val, double boundb) {
+        if(bounda < boundb) {
+            return clamp(bounda, val, boundb);
+        } else {
+            return clamp(boundb, val, bounda);
+        }
+    }
+    public static double wrap(double min, double val, double max) {
         if(max < min) {throw new IllegalArgumentException("Maximum is less than minimum!");}
-        int d = max - min;
+        double d = max - min;
         while(val >= max) {val -= d;}
         while(val < min) {val += d;}
         return val;
@@ -261,5 +275,68 @@ public class Utils {
     }
     public static URL asURL(String fileLocation) throws MalformedURLException {
         return new File(fileLocation).toURI().toURL();
+    }
+    public static byte[] bytes(int... ints) {
+        byte[] b = new byte[ints.length];
+        for(int i=0; i<b.length; i++) {
+            b[i] = (byte)ints[i];
+        }
+        return b;
+    }
+    public static short[] shorts(int... ints) {
+        short[] s = new short[ints.length];
+        for(int i=0; i<s.length; i++) {
+            s[i] = (short)ints[i];
+        }
+        return s;
+    }
+    public static short byteBits(byte b) {
+        return b < 0 ? (short)((short)b + pow2[8]) : b;
+    }
+    public static int shortBits(short s) {
+        return s < 0 ? (int)s + (int)pow2[16] : s;
+    }
+    public static long intBits(int i) {
+        return i < 0 ? (long)i + pow2[32] : i;
+    }
+    public static int addTillPositive(int val, int add) {
+        while(val < 0) {
+            val += add;
+        }
+        return val;
+    }
+    public static double transformRange(double value, double originalLow, double originalHigh, double finalLow, double finalHigh) {
+        value -= originalLow; // [oL, oH] - oL : [0, oR]
+        value /= originalHigh - originalLow; // [0, oR] / oR : [0, 1]
+        value *= finalHigh - finalLow; // [0, 1] * fR : [0, fR]
+        value += finalLow; // [0, fR] + fL : [fL, fH]
+        return value;
+    }
+    public static boolean inRange(double low, double high, double val) {
+        return low <= val && val <= high;
+    }
+    public static boolean inRangeExclusive(double low, double high, double val) {
+        return low < val && val < high;
+    }
+    
+    public static String hex(int i) {
+        return Long.toString(intBits(i), 16);
+    }
+    public static String hex(short i) {
+        return Long.toString(shortBits(i), 16);
+    }
+    public static String hex(byte i) {
+        return Long.toString(byteBits(i), 16);
+    }
+    public static double moveTowards(double current, double target, double maxstep) {
+        if(Math.abs(current-target) < maxstep) {return target;}
+        return current - Math.signum(current-target)*maxstep;
+    }
+    public static double moveTowardsExpDecAccel(double current, double target, double decay) {
+        return clamp2(0, current + (target-current)*decay, target);
+    }
+    
+    public static int toInt(Integer i) {
+        return i == null ? 0 : i;
     }
 }

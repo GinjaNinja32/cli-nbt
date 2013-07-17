@@ -1,0 +1,33 @@
+compound:"rootTag"={
+	string:"stringTag"="compound tags use {} as delimiters";
+	string:"stringTag2"="list tags use []";
+	list:"aListTag"=[
+		string:"inside lists, tags do not have a name";
+		string:"just a payload";
+		string:"they have to be the same type too";
+	]
+	compound:"compoundTag"={
+		string:"info0"="compound tags can hold different types, e.g.";
+		double:"pi"=3.14159265359;
+		float:"e"=2.7182818;
+		long:"2^32"=4 294 967 296;
+		string:"info1"="you can't use commas to separate numbers, but you can use spaces";
+		string:"info2"="The program strips out all non-quoted whitespace, so you can do this if you /really/ want to";
+		d
+		o
+		u
+		b
+		l
+		e
+		:
+		"double2"
+		=
+		3
+		2
+		1
+		;
+		string:"info3"="though I don't see why you'd want to";
+	}
+	string:"moreinfo"="Try loading this file into cli-nbt - use \"java -jar cli-nbt.jar -m example.nbtm\"";
+	string:"\\"="Backslash is the literal character. It forces the next character to be interpreted literally.";
+}

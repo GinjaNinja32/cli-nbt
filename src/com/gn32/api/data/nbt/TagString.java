@@ -9,7 +9,7 @@ public class TagString extends Tag {
     String payload;
 
     public TagString(String name, String payload) {
-        super(name);
+        super(name, "string");
         this.payload = payload;
     }
 
@@ -23,5 +23,10 @@ public class TagString extends Tag {
     
     public String toString() {
         return "TAG_String("+name+"):\""+payload + "\"";
+    }
+
+    @Override
+    public Object payloadGeneric() {
+        return payload;
     }
 }

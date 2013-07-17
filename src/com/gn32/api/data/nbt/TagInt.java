@@ -9,7 +9,7 @@ public class TagInt extends Tag {
     int payload;
 
     public TagInt(String name, int payload) {
-        super(name);
+        super(name, "int");
         this.payload = payload;
     }
 
@@ -18,6 +18,11 @@ public class TagInt extends Tag {
     }
 
     public int getPayload() {
+        return payload;
+    }
+
+    @Override
+    public Object payloadGeneric() {
         return payload;
     }
     

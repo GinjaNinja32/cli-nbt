@@ -11,7 +11,7 @@ public class TagShort extends Tag {
     short payload;
 
     public TagShort(String name, short payload) {
-        super(name);
+        super(name, "short");
         this.payload = payload;
     }
 
@@ -25,5 +25,10 @@ public class TagShort extends Tag {
     
     public String toString() {
         return "TAG_Short("+name+"):"+payload;
+    }
+
+    @Override
+    public Object payloadGeneric() {
+        return payload;
     }
 }

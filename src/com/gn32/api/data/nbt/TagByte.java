@@ -9,7 +9,7 @@ public class TagByte extends Tag {
     byte payload;
 
     public TagByte(String name, byte payload) {
-        super(name);
+        super(name, "byte");
         this.payload = payload;
     }
 
@@ -23,5 +23,10 @@ public class TagByte extends Tag {
     
     public String toString() {
         return "TAG_Byte("+name+"):"+payload;
+    }
+
+    @Override
+    public Object payloadGeneric() {
+        return payload;
     }
 }

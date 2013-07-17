@@ -14,9 +14,12 @@ public abstract class Tag {
     Tag parent;
     
     String name;
+    
+    final String type;
 
-    Tag(String name) {
+    Tag(String name, String type) {
         this.name = name;
+        this.type = type;
     }
     
     public String getName() {
@@ -479,4 +482,87 @@ public abstract class Tag {
             throw new NBTException("Invalid payload type!");
         }
     }
+    
+    
+    
+    
+    public TagByte asByteTag() throws NBTException {
+        if(this instanceof TagByte) {
+            return (TagByte)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagShort asShortTag() throws NBTException {
+        if(this instanceof TagShort) {
+            return (TagShort)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagInt asIntTag() throws NBTException {
+        if(this instanceof TagInt) {
+            return (TagInt)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagLong asLongTag() throws NBTException {
+        if(this instanceof TagLong) {
+            return (TagLong)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagFloat asFloatTag() throws NBTException {
+        if(this instanceof TagFloat) {
+            return (TagFloat)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagDouble asDoubleTag() throws NBTException {
+        if(this instanceof TagDouble) {
+            return (TagDouble)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagByteArray asByteArrayTag() throws NBTException {
+        if(this instanceof TagByteArray) {
+            return (TagByteArray)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagString asStringTag() throws NBTException {
+        if(this instanceof TagString) {
+            return (TagString)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagList asListTag() throws NBTException {
+        if(this instanceof TagList) {
+            return (TagList)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagCompound asCompoundTag() throws NBTException {
+        if(this instanceof TagCompound) {
+            return (TagCompound)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    public TagIntArray asIntArrayTag() throws NBTException {
+        if(this instanceof TagIntArray) {
+            return (TagIntArray)this;
+        } else {
+            throw new NBTException("Wrong tag type!");
+        }
+    }
+    
+    public abstract Object payloadGeneric();
 }

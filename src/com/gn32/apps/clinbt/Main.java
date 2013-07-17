@@ -3,7 +3,12 @@ package com.gn32.apps.clinbt;
 import com.gn32.api.Utils;
 import com.gn32.api.data.nbt.*;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -21,8 +26,48 @@ public class Main {
             if(args.length == 0) {
                 blank();
             } else {
-                println("Reading file '" + args[0] + "'");
-                load(args[0]);
+                switch(args[0]) {
+                    case "-c": {
+                        if(args.length < 3) {
+                            System.out.println("Must specify a file to compile and a file to save compiled data to after -c!");
+                            System.exit(0);
+                        }
+                        DataOutputStream out = new DataOutputStream(new FileOutputStream(new File(args[2])));
+                        nbt = new NBT(NBTMarkupTranslator.compile(Utils.readFile(args[1])));
+                        nbt.writeNBT(out);
+                        System.out.println("Converted successfully.");
+                        System.exit(0);
+                        break;
+                    }
+                    case "-d": {
+                        if(args.length < 3) {
+                            System.out.println("Must specify a file to decode and a file to save decoded data to after -d!");
+                            System.exit(0);
+                        }
+                        DataInputStream in = new DataInputStream(new FileInputStream(new File(args[1])));
+                        DataOutputStream out = new DataOutputStream(new FileOutputStream(new File(args[2])));
+                        nbt = NBT.readNBT(in);
+                        String s = NBTMarkupTranslator.output(nbt.getMain(), true, "", "    ");
+                        for(char c: s.toCharArray()) {
+                            out.write(c);
+                        }
+                        System.out.println("Converted successfully.");
+                        System.exit(0);
+                        break;
+                    }
+                    case "-m": {
+                        if(args.length < 2) {
+                            System.out.println("Must specify a file to read after -m!");
+                            System.exit(0);
+                        }
+                        nbt = new NBT(NBTMarkupTranslator.compile(Utils.readFile(args[1])));
+                        currentTag = nbt.getMain();
+                        break;
+                    }
+                    default:
+                        println("Reading file '" + args[0] + "'");
+                        load(args[0]);
+                }
             }
             while(true) {
                 print("> ");
@@ -74,6 +119,7 @@ public class Main {
         println(" Command            \tResult");
         println("  add <type>        \t Add a new tag");
         println("  rem <name|index>  \t Remove a tag");
+        println("  rem -r <regexp>   \t Remove all tags matching a regular expression");
         println("  ls                \t View the contents of the current tag");
         println("  cd                \t Change to another tag. Path is '/' or '\\'-separated, '..' is parent.");
         println("  clr               \t Clear (empty) the current tag");

@@ -13,7 +13,7 @@ public class TagCompound extends Tag {
     ArrayList<Tag> payload = new ArrayList<>();
 
     public TagCompound(String name, Tag... payload) {
-        super(name);
+        super(name, "compound");
         this.payload.addAll(Arrays.asList(payload));
     }
     
@@ -80,5 +80,10 @@ public class TagCompound extends Tag {
             }
         }
         return s.substring(0, s.length() - 1) + "\n" + lineStarter + "}";
+    }
+    
+    @Override
+    public Object payloadGeneric() {
+        return payload.toArray(new Tag[0]);
     }
 }

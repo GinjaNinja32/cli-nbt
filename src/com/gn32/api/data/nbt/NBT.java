@@ -1,10 +1,8 @@
 package com.gn32.api.data.nbt;
 
-import com.gn32.api.Utils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.zip.GZIPInputStream;
 
 /**
  *
@@ -12,7 +10,7 @@ import java.util.zip.GZIPInputStream;
  */
 public class NBT {
     TagCompound mainTag; // "Every NBT file will always begin with a TAG_Compound. No exceptions."
-    private NBT(TagCompound mainTag) {
+    public NBT(TagCompound mainTag) {
         this.mainTag = mainTag;
     }
     
