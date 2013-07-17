@@ -32,6 +32,20 @@ Command-line:
 <tr><td>-m <i>file</i></td><td>Read <i>file</i> for editing in CLI-NBT</td></tr></table>
 
 Text language:
-&lt;tag-type&gt;:"&lt;name&gt;"=&lt;value&gt;;
+&lt;tag-type&gt;:"&lt;name&gt;"=&lt;value&gt;;<br/>
+All tag types are supported:<br>
+<ul>
+<li>byte</li>
+<li>short</li>
+<li>int</li>
+<li>long</li>
+<li>float</li>
+<li>double</li>
+<li>bytearr</li>
+<li>string</li>
+<li>list</li>
+<li>compound</li>
+<li>intarr</li>
+</ul>
 There is an example file in the repository, example.nbtm, with 'comments' in string tags to explain the format more thoroughly.
 There is also a Notepad++ 'user-defined language' file for the text language in the repository - nbtm.xml
