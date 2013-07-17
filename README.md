@@ -5,8 +5,8 @@ Command-line NBT editor, with support for reading and writing a custom NBT-like 
 
 Author: GinjaNinja32 (@GNinja32)
 
-Binaries:
-v1.0 http://bit.ly/YMhSNP - No text file support, just load/save of NBT files
+Binaries:<br/>
+v1.0 http://bit.ly/YMhSNP - No text file support, just load/save of NBT files<br/>
 v1.1 http://bit.ly/12GNXKz - Supports read/write of text format
 
 List of in-app commands:
