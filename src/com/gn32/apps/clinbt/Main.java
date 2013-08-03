@@ -64,6 +64,14 @@ public class Main {
                         currentTag = nbt.getMain();
                         break;
                     }
+                    case "-g": {
+                    	if(args.length < 2) {
+                            System.out.println("Must specify a file to read after -g!");
+                            System.exit(0);
+                    	}
+                        println("Reading compressed file '" + args[1] + "'");
+                        load(args[1]);
+                    }
                     default:
                         println("Reading file '" + args[0] + "'");
                         load(args[0]);
@@ -259,11 +267,14 @@ public class Main {
     
     static void save(String arg) throws IOException {
         try {
-            if(arg.startsWith("-g ")) {
-                nbt.writeNBT(Utils.setResourceAsGZIPStream(arg.substring(3)));
-            } else {
-                nbt.writeNBT(Utils.setResourceAsStream(arg));
-            }
+        	DataOutputStream out;
+            if(arg.startsWith("-g "))
+                out = Utils.setResourceAsGZIPStream(arg.substring(3));
+            else
+                out = Utils.setResourceAsStream(arg);
+            nbt.writeNBT(out);
+            out.flush();
+            out.close();
         } catch(NBTException nbte) {
             println("Error: " + nbte.getMessage());
         }
@@ -271,11 +282,13 @@ public class Main {
     
     static void load(String arg) throws IOException {
         try {
-            if(arg.startsWith("-g ")) {
-                nbt = NBT.readNBT(Utils.getResourceAsGZIPStream(arg.substring(3)));
-            } else {
-                nbt = NBT.readNBT(Utils.getResourceAsStream(arg));
-            }
+        	DataInputStream in;
+            if(arg.startsWith("-g "))
+                in = Utils.getResourceAsGZIPStream(arg.substring(3));
+            else
+                in = Utils.getResourceAsStream(arg);
+            nbt = NBT.readNBT(in);
+            in.close();
             currentTag = nbt.getMain();
         } catch(NBTException nbte) {
             println("Error: " + nbte.getMessage());
