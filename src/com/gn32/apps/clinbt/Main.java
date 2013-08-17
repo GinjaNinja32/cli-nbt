@@ -268,10 +268,11 @@ public class Main {
     static void save(String arg) throws IOException {
         try {
         	DataOutputStream out;
-            if(arg.startsWith("-g "))
+            if(arg.startsWith("-g ")) {
                 out = Utils.setResourceAsGZIPStream(arg.substring(3));
-            else
+            } else {
                 out = Utils.setResourceAsStream(arg);
+			}
             nbt.writeNBT(out);
             out.flush();
             out.close();
@@ -283,10 +284,11 @@ public class Main {
     static void load(String arg) throws IOException {
         try {
         	DataInputStream in;
-            if(arg.startsWith("-g "))
+            if(arg.startsWith("-g ")) {
                 in = Utils.getResourceAsGZIPStream(arg.substring(3));
-            else
+            } else {
                 in = Utils.getResourceAsStream(arg);
+			}
             nbt = NBT.readNBT(in);
             in.close();
             currentTag = nbt.getMain();
