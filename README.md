@@ -29,7 +29,8 @@ Command-line:
 <table><tr><td><strong>Argument</strong></td><td><strong>Result</strong></td></tr>
 <tr><td>-d <i>file1</i> <i>file2</i></td><td>Decode <i>file1</i> (in true NBT format), and write the results (in text format) to <i>file2</i></td></tr>
 <tr><td>-c <i>file1</i> <i>file2</i></td><td>Encode <i>file1</i> (in text format), and write the results (in true NBT format) to <i>file2</i></td></tr>
-<tr><td>-m <i>file</i></td><td>Read <i>file</i> for editing in CLI-NBT</td></tr></table>
+<tr><td>-m <i>file</i></td><td>Read <i>file</i> for editing in CLI-NBT</td></tr>
+<tr><td>-g <i>file</i></td><td>Load <i>file</i> with gzip decompression</td></tr></table>
 
 Text language:
 &lt;tag-type&gt;:"&lt;name&gt;"=&lt;value&gt;;<br/>
