@@ -7,7 +7,8 @@ Author: GinjaNinja32 (@GNinja32)
 
 Binaries:<br/>
 v1.0 http://bit.ly/YMhSNP - No text file support, just load/save of NBT files<br/>
-v1.1 http://bit.ly/12GNXKz - Supports read/write of text format
+v1.1 http://bit.ly/12GNXKz - Supports read/write of text format<br/>
+v1.1 Update 1 http://bit.ly/1aef5VJ - GZip saving fixed, added -g argument to read a compressed file
 
 List of in-app commands:
 Type 'help' at the '>' prompt to access this list in-app.
